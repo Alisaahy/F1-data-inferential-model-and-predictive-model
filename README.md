@@ -7,17 +7,17 @@ In this part, I fit a model using features that make theoretical sense to descri
 
 - Import and load datasets from s3 bucket.
 
-- Feature engineering: select and transform features by making reasonable theoretical inference. Features I add to the original datasets are:/
+- Feature engineering: select and transform features by making reasonable theoretical inference. Features I add to the original datasets are:<br />
 1. Age: Age matters in F1 drivers' career path. Mostly, late 20s and early 30s can be a driver's peak year. So, we can hypothesize that drivers who are in their late 20s or early 30s are more likely to achieve higher position in F1 race. Therefore, I added age feature, which is the (race date - driver's birth date) to the dataset to see whether age can help us explain why a driver arrives in second place in a race.
 2. Qualifying: Qualifying is a session to determine driver's grid in a race. It is split into three parts, called Q1, Q2, and Q3. Qualifying position can reflect the driver's competence to some extent. So, I calculated the average qualifying time from a driver's Q1, Q2 and Q3 sessions.
 3. Fastest lap: In F1, the fastest lap is the quickest lap run during a race. It's reasonable for us to hypothesize that the driver's fastest lap time may be positively related to the driver's final position. We can also hypothesize which lap the driver has the fastest speed can affect the driver's final position. 
 4. StatusId: T hundreds of statuses that a driver can experience for a race, such as accident, collision, overheating, etc. These different kinds of status will largely determine a driver's final position. It's highly possible that drivers who ranks higher are those who finish their race. 
 5. Grid: Grid position can affect the race. For example, pole sitter will have an advantage at the start, because they do not need to follow any other cars. So, I used grid as a useful feature in the dataset
 
-- Build inferential model:
+- Build inferential model:<br />
 I chose Bayesian Additive Regression Trees (BART) model to inferentially explain why some drivers arrive in the second place. I trained BART on all of our data, and separated only the Y vector from all of our predictors to create two matrices.
 
-Why Bart:
+Why Bart:<br />
 1.	It naturally identifies interactions and non-linearities among predictors
 2.	It is straightforward to estimate uncertainty
 
